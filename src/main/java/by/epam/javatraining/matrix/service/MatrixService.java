@@ -17,6 +17,7 @@ public class MatrixService extends Thread {
         int diagonalPlace = findPlaceToInsertThreadNameToMatrixDiagonal();
         insertThreadNameNumberIntoDiagonal(diagonalPlace);
         insertValueIntoColumnOrRowOfMatrix(diagonalPlace);
+        int sum = findSumOfColumnAndRowElements(diagonalPlace);
     }
 
     public void insertThreadNameNumberIntoDiagonal(int diagonalPlace) {
@@ -53,7 +54,16 @@ public class MatrixService extends Thread {
     }
 
     public int findSumOfColumnAndRowElements(int diagonalPlace) {
+        int sum = 0;
+        for (int i = 0; i < matrix.getMatrix()[diagonalPlace].length; i++) {
+            sum += matrix.getMatrix()[diagonalPlace][i];
+        }
 
+        for (int i = 0; i < matrix.getMatrix().length; i++) {
+            sum += matrix.getMatrix()[i][diagonalPlace];
+        }
+
+        return sum;
     }
 
     private int goLeft(int diagonalPlace) {
