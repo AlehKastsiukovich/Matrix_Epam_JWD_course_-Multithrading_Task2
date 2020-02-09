@@ -5,7 +5,8 @@ public class Matrix {
     private int[][] matrix;
 
     private Matrix() {
-        //init matrix
+        n = 5;
+        matrix = new int[n][n];
     }
 
     private static class MatrixHolder {
