@@ -1,24 +1,18 @@
 package by.epam.javatraining.matrix.service;
 
-import by.epam.javatraining.matrix.entity.Matrix;
+import by.epam.javatraining.matrix.entity.MatrixHolder;
 import java.util.Random;
 
-public class MatrixService extends Thread {
-    private static Matrix matrix = Matrix.getInstance();
+public class MatrixHolderService extends Thread {
+    private static MatrixHolder matrix = MatrixHolder.getInstance();
     private static Random random = new Random();
     private static int idCounter = 1;
 
-    public MatrixService() {
-        super(String.valueOf(idCounter++));
+    public MatrixHolderService() {
+
     }
 
-    @Override
-    public void run() {
-        int diagonalPlace = findPlaceToInsertThreadNameToMatrixDiagonal();
-        insertThreadNameNumberIntoDiagonal(diagonalPlace);
-        insertValueIntoColumnOrRowOfMatrix(diagonalPlace);
-        int sum = findSumOfColumnAndRowElements(diagonalPlace);
-    }
+
 
     public void insertThreadNameNumberIntoDiagonal(int diagonalPlace) {
         matrix.getMatrix()[diagonalPlace][diagonalPlace] = Integer.parseInt(Thread.currentThread().getName());
@@ -26,7 +20,6 @@ public class MatrixService extends Thread {
 
     private int findPlaceToInsertThreadNameToMatrixDiagonal() {
         return random.nextInt(matrix.getN());
-
     }
 
     public void insertValueIntoColumnOrRowOfMatrix(int diagonalPlace) {
@@ -101,4 +94,6 @@ public class MatrixService extends Thread {
         int maxRange = matrix.getMatrix().length - 1;
         return random.nextInt((maxRange - minRange) + 1) + minRange;
     }
+
+
 }

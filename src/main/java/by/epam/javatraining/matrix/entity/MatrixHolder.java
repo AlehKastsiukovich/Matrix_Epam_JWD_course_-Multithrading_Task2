@@ -1,20 +1,20 @@
 package by.epam.javatraining.matrix.entity;
 
-public class Matrix {
+public class MatrixHolder {
     private int n;
     private int[][] matrix;
 
-    private Matrix() {
+    private MatrixHolder() {
         n = 5;
         matrix = new int[n][n];
     }
 
     private static class MatrixHolder {
-        private static final Matrix INSTANCE = new Matrix();
+        private static final by.epam.javatraining.matrix.entity.MatrixHolder INSTANCE = new by.epam.javatraining.matrix.entity.MatrixHolder();
     }
 
-    public static Matrix getInstance() {
-        return MatrixHolder.INSTANCE;
+    public static by.epam.javatraining.matrix.entity.MatrixHolder getInstance() {
+        return by.epam.javatraining.matrix.entity.MatrixHolder.MatrixHolder.INSTANCE;
     }
 
     public int getN() {
