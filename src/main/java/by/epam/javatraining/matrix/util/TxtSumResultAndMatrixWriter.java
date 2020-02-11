@@ -29,6 +29,7 @@ public class TxtSumResultAndMatrixWriter implements Runnable {
         StringParser parser = StringParser.getInstance();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
             bufferedWriter.write(parser.parseListToString(listOfSums));
+            listOfSums.removeAll(listOfSums);
             bufferedWriter.append("\n");
             bufferedWriter.write(parser.parseMatrixToString(matrix));
         } catch (IOException e) {

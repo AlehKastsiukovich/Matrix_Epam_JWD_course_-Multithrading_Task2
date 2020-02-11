@@ -22,7 +22,7 @@ public class StringParser {
     public String parseMatrixToString(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
-            sb.append(matrix[i]);
+            sb.append(matrix[i].toString());
         }
 
         return sb.toString();

@@ -14,7 +14,7 @@ public class ServiceHelperThread extends Thread {
     private static CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new TxtSumResultAndMatrixWriter());
     private static MatrixService service = MatrixService.getInstance();
     private static List<Integer> listOfSumResult = new ArrayList<>(5);
-    private static int idCounter = 0;
+    private static int idCounter = 1;
 
     static {
         semaphore = new Semaphore(service.getMatrix().getN());
@@ -52,8 +52,6 @@ public class ServiceHelperThread extends Thread {
         } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
-
-        listOfSumResult.removeAll(listOfSumResult);
 
         semaphore.release();
     }
