@@ -1,42 +1,19 @@
-
-
-import java.util.concurrent.*;
+import java.util.Arrays;
 
 public class Main implements Runnable {
-    private static Semaphore semaphore = new Semaphore(3);
 
     public void run() {
-        try {
-            semaphore.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(Thread.currentThread().getName() + " start task!");
 
-        if (semaphore.hasQueuedThreads()) {
-            semaphore.release();
-        }
-        System.out.println(Thread.currentThread().getName() + " end task!");
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService service = Executors.newFixedThreadPool(30);
+        int[][] matrix = new int[3][3];
+        StringBuilder sb = new StringBuilder();
 
-        for (int i = 0; i < 30; i++) {
-            service.submit(new Main());
+        for (int i = 0; i < matrix.length; i++) {
+            sb.append(Arrays.toString(matrix[i]));
         }
 
-        service.shutdown();
-
-
-//        for (int i = 0; i < matrix.getMatrix().length; i++) {
-//            System.out.println(Arrays.toString(matrix.getMatrix()[i]));
-//        }
-
+        System.out.println(sb.toString());
     }
 }

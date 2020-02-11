@@ -9,12 +9,12 @@ public class MatrixHolder {
         matrix = new int[n][n];
     }
 
-    private static class MatrixHolder {
-        private static final by.epam.javatraining.matrix.entity.MatrixHolder INSTANCE = new by.epam.javatraining.matrix.entity.MatrixHolder();
+    private static class MatrixInstanceCreator {
+        private static final by.epam.javatraining.matrix.entity.MatrixHolder INSTANCE = new MatrixHolder();
     }
 
     public static by.epam.javatraining.matrix.entity.MatrixHolder getInstance() {
-        return by.epam.javatraining.matrix.entity.MatrixHolder.MatrixHolder.INSTANCE;
+        return MatrixInstanceCreator.INSTANCE;
     }
 
     public int getN() {

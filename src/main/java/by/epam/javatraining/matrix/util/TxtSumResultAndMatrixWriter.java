@@ -1,22 +1,39 @@
 package by.epam.javatraining.matrix.util;
 
 import by.epam.javatraining.matrix.entity.MatrixHolder;
-
-import java.io.BufferedReader;
+import by.epam.javatraining.matrix.service.ServiceHelperThread;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
-public class TxtSumResultAndMatrixWriter {
-    private String filePath;
+public class TxtSumResultAndMatrixWriter implements Runnable {
+    private String filePath = "file.txt";
 
-    public void writeMatrixAndSumResultToFile(String result, int[][] matrix) {
+    @Override
+    public void run() {
+        MatrixHolder matrixHolder = MatrixHolder.getInstance();
+        List<Integer> resultList = ServiceHelperThread.getListOfSumResult();
+        writeMatrixAndSumResultToFile(resultList, matrixHolder.getMatrix());
+    }
+
+    private static class TxtSumResultAndMatrixWriterHolder {
+        private static final TxtSumResultAndMatrixWriter writer = new TxtSumResultAndMatrixWriter();
+    }
+
+    public static TxtSumResultAndMatrixWriter getInstance() {
+        return TxtSumResultAndMatrixWriterHolder.writer;
+    }
+
+    public void writeMatrixAndSumResultToFile(List<Integer> listOfSums, int[][] matrix) {
+        StringParser parser = StringParser.getInstance();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
-            bufferedWriter.write(result);
-            bufferedWriter.append(" - ");
-            bufferedWriter.write(String matrix);
+            bufferedWriter.write(parser.parseListToString(listOfSums));
+            bufferedWriter.append("\n");
+            bufferedWriter.write(parser.parseMatrixToString(matrix));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
