@@ -3,22 +3,26 @@ package by.epam.javatraining.matrix.service;
 import by.epam.javatraining.matrix.entity.MatrixHolder;
 import java.util.Random;
 
-public class MatrixHolderService extends Thread {
-    private static MatrixHolder matrix = MatrixHolder.getInstance();
-    private static Random random = new Random();
-    private static int idCounter = 1;
+public class MatrixService extends Thread {
+    private MatrixHolder matrix = MatrixHolder.getInstance();
+    private Random random = new Random();
 
-    public MatrixHolderService() {
-
+    private MatrixService() {
     }
 
+    private static class MatrixServiceHolder {
+        private static final MatrixService instance = new MatrixService();
+    }
 
+    public static MatrixService getInstance() {
+        return MatrixServiceHolder.instance;
+    }
 
     public void insertThreadNameNumberIntoDiagonal(int diagonalPlace) {
         matrix.getMatrix()[diagonalPlace][diagonalPlace] = Integer.parseInt(Thread.currentThread().getName());
     }
 
-    private int findPlaceToInsertThreadNameToMatrixDiagonal() {
+    public int findPlaceToInsertThreadNameToMatrixDiagonal() {
         return random.nextInt(matrix.getN());
     }
 
@@ -95,5 +99,7 @@ public class MatrixHolderService extends Thread {
         return random.nextInt((maxRange - minRange) + 1) + minRange;
     }
 
-
+    public MatrixHolder getMatrix() {
+        return matrix;
+    }
 }
