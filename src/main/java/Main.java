@@ -9,8 +9,8 @@ public class Main implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-       for (int i = 0; i < 10; i++) {
-           new ServiceHelperThread().start();
-       }
+        for (int i = 0; i < 20; i++) {
+            new ServiceHelperThread().start();
+        }
     }
 }

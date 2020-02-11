@@ -1,5 +1,6 @@
 package by.epam.javatraining.matrix.util;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
@@ -22,7 +23,7 @@ public class StringParser {
     public String parseMatrixToString(int[][] matrix) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < matrix.length; i++) {
-            sb.append(matrix[i].toString());
+            sb.append(Arrays.toString(matrix[i]));
         }
 
         return sb.toString();
