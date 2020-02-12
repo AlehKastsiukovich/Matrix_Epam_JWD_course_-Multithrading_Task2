@@ -1,19 +1,24 @@
 package by.epam.javatraining.matrix.entity;
 
+import by.epam.javatraining.matrix.util.MatrixInitializationDataReader;
+import by.epam.javatraining.matrix.util.StringParser;
+
 public class MatrixHolder {
     private int n;
     private int[][] matrix;
 
     private MatrixHolder() {
-        n = 5;
+        MatrixInitializationDataReader reader = MatrixInitializationDataReader.getInstance();
+        StringParser parser = StringParser.getInstance();
+        n = parser.parseStringToMatrixSize(reader.readFile());
         matrix = new int[n][n];
     }
 
     private static class MatrixInstanceCreator {
-        private static final by.epam.javatraining.matrix.entity.MatrixHolder INSTANCE = new MatrixHolder();
+        private static final MatrixHolder INSTANCE = new MatrixHolder();
     }
 
-    public static by.epam.javatraining.matrix.entity.MatrixHolder getInstance() {
+    public static MatrixHolder getInstance() {
         return MatrixInstanceCreator.INSTANCE;
     }
 

@@ -10,9 +10,17 @@ import java.util.List;
 public class MatrixResultWriter implements Runnable {
     private final String filePath;
 
-    {
+    public MatrixResultWriter() {
         ClassLoader classLoader = getClass().getClassLoader();
         filePath = classLoader.getResource("result.txt").getPath();
+    }
+
+    private static class MatrixResultWriterHolder {
+        public static final MatrixResultWriter instance = new MatrixResultWriter();
+    }
+
+    public static MatrixResultWriter getInstance() {
+        return MatrixResultWriterHolder.instance;
     }
 
     public String getFilePath() {
@@ -24,14 +32,6 @@ public class MatrixResultWriter implements Runnable {
         MatrixHolder matrixHolder = MatrixHolder.getInstance();
         List<Integer> resultList = ServiceHelperThread.getListOfSumResult();
         writeMatrixAndSumResultToFile(resultList, matrixHolder.getMatrix());
-    }
-
-    private static class MatrixResultWriterHolder {
-        private static final MatrixResultWriter writer = new MatrixResultWriter();
-    }
-
-    public static MatrixResultWriter getInstance() {
-        return MatrixResultWriterHolder.writer;
     }
 
     public void writeMatrixAndSumResultToFile(List<Integer> listOfSums, int[][] matrix) {

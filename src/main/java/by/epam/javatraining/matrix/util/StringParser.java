@@ -28,4 +28,17 @@ public class StringParser {
 
         return sb.toString();
     }
+
+    public int parseStringToMatrixSize(String strData) {
+        String[] dataArray = strData.split(" ");
+        int size = 0;
+
+        try {
+            size = Integer.parseInt(dataArray[0]);
+        } catch (NumberFormatException e) {
+
+        }
+
+        return size;
+    }
 }
