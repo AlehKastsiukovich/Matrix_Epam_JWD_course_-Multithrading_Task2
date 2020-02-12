@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class TxtSumResultAndMatrixWriter implements Runnable {
+public class MatrixResultWriter implements Runnable {
     private final String filePath;
 
     {
@@ -27,10 +27,10 @@ public class TxtSumResultAndMatrixWriter implements Runnable {
     }
 
     private static class TxtSumResultAndMatrixWriterHolder {
-        private static final TxtSumResultAndMatrixWriter writer = new TxtSumResultAndMatrixWriter();
+        private static final MatrixResultWriter writer = new MatrixResultWriter();
     }
 
-    public static TxtSumResultAndMatrixWriter getInstance() {
+    public static MatrixResultWriter getInstance() {
         return TxtSumResultAndMatrixWriterHolder.writer;
     }
 

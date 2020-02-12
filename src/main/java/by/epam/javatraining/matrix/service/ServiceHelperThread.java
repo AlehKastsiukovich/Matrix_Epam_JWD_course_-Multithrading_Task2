@@ -1,6 +1,6 @@
 package by.epam.javatraining.matrix.service;
 
-import by.epam.javatraining.matrix.util.TxtSumResultAndMatrixWriter;
+import by.epam.javatraining.matrix.util.MatrixResultWriter;
 import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class ServiceHelperThread extends Thread {
     private static final int THREAD_ON_GROUP = 5;
     private static Lock lock = new ReentrantLock();
     private static Semaphore semaphore;
-    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_ON_GROUP, new TxtSumResultAndMatrixWriter());
+    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_ON_GROUP, new MatrixResultWriter());
     private static MatrixService service = MatrixService.getInstance();
     private static List<Integer> listOfSumResult = new ArrayList<>();
     private static int idCounter = 1;
