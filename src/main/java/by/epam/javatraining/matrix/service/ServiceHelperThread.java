@@ -1,7 +1,7 @@
 package by.epam.javatraining.matrix.service;
 
-import by.epam.javatraining.matrix.util.TxtSumResultAndMatrixWriter;
 
+import by.epam.javatraining.matrix.util.TxtSumResultAndMatrixWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -9,11 +9,12 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ServiceHelperThread extends Thread {
+    private static final int THREAD_ON_GROUP = 5;
     private static Lock lock = new ReentrantLock();
     private static Semaphore semaphore;
-    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new TxtSumResultAndMatrixWriter());
+    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_ON_GROUP, new TxtSumResultAndMatrixWriter());
     private static MatrixService service = MatrixService.getInstance();
-    private static List<Integer> listOfSumResult = new ArrayList<>(5);
+    private static List<Integer> listOfSumResult = new ArrayList<>();
     private static int idCounter = 1;
 
     static {
@@ -33,7 +34,7 @@ public class ServiceHelperThread extends Thread {
         try {
             semaphore.acquire();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+
         }
 
         lock.lock();
@@ -46,11 +47,11 @@ public class ServiceHelperThread extends Thread {
 
         try {
             cyclicBarrier.await();
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+
         } catch (BrokenBarrierException e) {
-            e.printStackTrace();
+
         }
 
         semaphore.release();
