@@ -26,21 +26,22 @@ public class MatrixResultWriter implements Runnable {
         writeMatrixAndSumResultToFile(resultList, matrixHolder.getMatrix());
     }
 
-    private static class TxtSumResultAndMatrixWriterHolder {
+    private static class MatrixResultWriterHolder {
         private static final MatrixResultWriter writer = new MatrixResultWriter();
     }
 
     public static MatrixResultWriter getInstance() {
-        return TxtSumResultAndMatrixWriterHolder.writer;
+        return MatrixResultWriterHolder.writer;
     }
 
     public void writeMatrixAndSumResultToFile(List<Integer> listOfSums, int[][] matrix) {
         StringParser parser = StringParser.getInstance();
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true))) {
             bufferedWriter.write(parser.parseListToString(listOfSums));
             listOfSums.removeAll(listOfSums);
             bufferedWriter.append("\n");
             bufferedWriter.write(parser.parseMatrixToString(matrix));
+            bufferedWriter.append("\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

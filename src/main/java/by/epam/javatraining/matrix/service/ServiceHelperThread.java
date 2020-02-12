@@ -51,7 +51,7 @@ public class ServiceHelperThread extends Thread {
             cyclicBarrier.await();
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
-            LOGGER.error("Thread was interrupted in the cyclingbarier await method!", e);
+            LOGGER.error("Thread was interrupted CyclingBarrier await method!", e);
             Thread.currentThread().interrupt();
         } catch (BrokenBarrierException e) {
             LOGGER.error("Barrier in broken state!", e);
