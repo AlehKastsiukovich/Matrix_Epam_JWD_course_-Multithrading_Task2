@@ -8,7 +8,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class TxtSumResultAndMatrixWriter implements Runnable {
-    private String filePath = "file.txt";
+    private final String filePath;
+
+    {
+        ClassLoader classLoader = getClass().getClassLoader();
+        filePath = classLoader.getResource("result.txt").getPath();
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
 
     @Override
     public void run() {
