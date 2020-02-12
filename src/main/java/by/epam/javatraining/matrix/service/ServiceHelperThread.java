@@ -36,6 +36,7 @@ public class ServiceHelperThread extends Thread {
             semaphore.acquire();
         } catch (InterruptedException e) {
             LOGGER.error("Thread was interrupted in the semaphore acquire method!", e);
+            Thread.currentThread().interrupt();
         }
 
         lock.lock();
@@ -51,6 +52,7 @@ public class ServiceHelperThread extends Thread {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             LOGGER.error("Thread was interrupted in the cyclingbarier await method!", e);
+            Thread.currentThread().interrupt();
         } catch (BrokenBarrierException e) {
             LOGGER.error("Barrier in broken state!", e);
         }
