@@ -35,7 +35,7 @@ public class Validator {
         } catch (NumberFormatException e) {
             return false;
         }
-        if (numberOfThreads < matrixSize && numberOfThreads % matrixSize != 0)
+        if (numberOfThreads < matrixSize || numberOfThreads % matrixSize != 0)
             return false;
 
         return true;
