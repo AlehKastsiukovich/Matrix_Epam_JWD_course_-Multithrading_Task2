@@ -1,9 +1,12 @@
 package by.epam.javatraining.matrix.util;
 
+import by.epam.javatraining.matrix.exception.UtilException;
+import by.epam.javatraining.matrix.validator.Validator;
 import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
+    private Validator validator = Validator.getInstance();
 
     private StringParser() {
     }
@@ -29,15 +32,14 @@ public class StringParser {
         return sb.toString();
     }
 
-    public int parseStringToMatrixSize(String strData) {
+    public int parseStringToMatrixSize(String strData) throws UtilException {
+        if (!validator.checkDataFromFile(strData)) {
+            throw new UtilException();
+        }
+
         String[] dataArray = strData.split(" ");
         int size = 0;
-
-        try {
-            size = Integer.parseInt(dataArray[0]);
-        } catch (NumberFormatException e) {
-
-        }
+        size = Integer.parseInt(dataArray[0]);
 
         return size;
     }

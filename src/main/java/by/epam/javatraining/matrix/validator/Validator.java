@@ -2,6 +2,17 @@ package by.epam.javatraining.matrix.validator;
 
 public class Validator {
 
+    private Validator() {
+    }
+
+    private static class ValidatorHolder {
+        private static final Validator validator = new Validator();
+    }
+
+    public static Validator getInstance() {
+        return ValidatorHolder.validator;
+    }
+
     public boolean checkDataFromFile(String data) {
         if (data == null)
             return false;
