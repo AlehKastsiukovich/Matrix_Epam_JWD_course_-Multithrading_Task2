@@ -5,20 +5,20 @@ import java.io.BufferedReader;;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class MatrixInitializationDataReader {
+public class ResourceFileReader {
     private final String path;
 
-    public MatrixInitializationDataReader() {
+    public ResourceFileReader() {
         ClassLoader classLoader = getClass().getClassLoader();
         path = classLoader.getResource("data.txt").getPath();
     }
 
-    private static class MatrixInitializationDataReaderHolder {
-        private static final MatrixInitializationDataReader instance = new MatrixInitializationDataReader();
+    private static class FileReaderHolder {
+        private static final ResourceFileReader instance = new ResourceFileReader();
     }
 
-    public static MatrixInitializationDataReader getInstance() {
-        return MatrixInitializationDataReaderHolder.instance;
+    public static ResourceFileReader getInstance() {
+        return FileReaderHolder.instance;
     }
 
     public String readFile() throws UtilException {

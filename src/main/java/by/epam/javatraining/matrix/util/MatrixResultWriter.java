@@ -2,12 +2,14 @@ package by.epam.javatraining.matrix.util;
 
 import by.epam.javatraining.matrix.entity.MatrixHolder;
 import by.epam.javatraining.matrix.service.ServiceHelperThread;
+import org.apache.log4j.Logger;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
 public class MatrixResultWriter implements Runnable {
+    private final static Logger logger = Logger.getLogger(MatrixResultWriter.class);
     private final String filePath;
 
     public MatrixResultWriter() {
@@ -43,7 +45,7 @@ public class MatrixResultWriter implements Runnable {
             bufferedWriter.write(parser.parseMatrixToString(matrix));
             bufferedWriter.append("\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 }
