@@ -1,5 +1,6 @@
 package by.epam.javatraining.matrix.util;
 
+import by.epam.javatraining.matrix.exception.UtilException;
 import java.io.BufferedReader;;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,13 +21,13 @@ public class MatrixInitializationDataReader {
         return MatrixInitializationDataReaderHolder.instance;
     }
 
-    public String readFile() {
+    public String readFile() throws UtilException {
         String data = null;
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             data = bufferedReader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UtilException(e);
         }
 
         return data;

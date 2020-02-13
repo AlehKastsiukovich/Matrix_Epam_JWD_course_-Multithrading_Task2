@@ -10,17 +10,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ServiceHelperThread extends Thread {
     private static final Logger LOGGER = Logger.getLogger(ServiceHelperThread.class);
-    private static final int THREAD_ON_GROUP = 5;
     private static Lock lock = new ReentrantLock();
-    private static Semaphore semaphore;
-    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_ON_GROUP, new MatrixResultWriter());
     private static MatrixService service = MatrixService.getInstance();
+    private static Semaphore semaphore = new Semaphore(service.getMatrix().getN());
+    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(service.getMatrix().getN(), new MatrixResultWriter());
     private static List<Integer> listOfSumResult = new ArrayList<>();
     private static int idCounter = 1;
 
-    static {
-        semaphore = new Semaphore(service.getMatrix().getN());
-    }
 
     public ServiceHelperThread() {
         super(String.valueOf(idCounter++));

@@ -1,9 +1,16 @@
 package by.epam.javatraining.matrix.service;
 
 import by.epam.javatraining.matrix.entity.MatrixHolder;
+import by.epam.javatraining.matrix.exception.ServiceException;
+import by.epam.javatraining.matrix.exception.UtilException;
+import by.epam.javatraining.matrix.util.MatrixInitializationDataReader;
+import by.epam.javatraining.matrix.util.StringParser;
+import org.apache.log4j.Logger;
+
 import java.util.Random;
 
-public class MatrixService extends Thread {
+public class MatrixService {
+    private final static Logger logger = Logger.getLogger(MatrixService.class);
     private MatrixHolder matrix = MatrixHolder.getInstance();
     private Random random = new Random();
 
@@ -16,6 +23,22 @@ public class MatrixService extends Thread {
 
     public static MatrixService getInstance() {
         return MatrixServiceHolder.instance;
+    }
+
+    public void initMatrix() throws ServiceException {
+        MatrixInitializationDataReader reader = MatrixInitializationDataReader.getInstance();
+        StringParser parser = StringParser.getInstance();
+        MatrixHolder matrixHolder = MatrixHolder.getInstance();
+
+        int matrixSize = 0;
+        try {
+            matrixSize = parser.parseStringToMatrixSize(reader.readFile());
+        } catch (UtilException e) {
+            logger.error(e);
+            throw new ServiceException(e);
+        }
+        matrixHolder.setMatrix(new int[matrixSize][matrixSize]);
+        matrixHolder.setN(matrixSize);
     }
 
     public void insertThreadNameNumberIntoDiagonal(int diagonalPlace) {
